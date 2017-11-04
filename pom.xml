@@ -5,7 +5,7 @@
     <groupId>ru.vyukov</groupId>
     <artifactId>spring-cloud-contract-expattern</artifactId>
     <packaging>jar</packaging>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
 
 
     <name>spring-cloud-contract-expattern</name>
