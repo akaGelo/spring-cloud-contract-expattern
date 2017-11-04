@@ -5,7 +5,7 @@
     <groupId>ru.vyukov</groupId>
     <artifactId>spring-cloud-contract-expattern</artifactId>
     <packaging>jar</packaging>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
 
     <name>spring-cloud-contract-expattern</name>
@@ -127,7 +127,7 @@
                             <goal>addSources</goal>
                             <goal>compile</goal>
                             <goal>testCompile</goal>
-                            <!--<goal>generateStubs</goal>-->
+                            <goal>generateStubs</goal>
                             <goal>groovydoc</goal>
                         </goals>
                     </execution>
