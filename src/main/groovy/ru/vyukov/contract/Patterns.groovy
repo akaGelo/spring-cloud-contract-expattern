@@ -1,19 +1,19 @@
 package ru.vyukov.contract
 
-import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
+import org.springframework.cloud.contract.spec.internal.ClientDslProperty
 import org.springframework.cloud.contract.spec.internal.DslProperty
+import org.springframework.cloud.contract.spec.internal.ServerDslProperty
 
+import java.util.function.BiFunction
 import java.util.regex.Pattern
 
-@PackageScope
-@CompileStatic
-class ExPatternValueDslProperty {
+
+abstract class Patterns<T extends DslProperty> {
 
     private final static Random random = new Random()
 
-
-    private DslProperty createAndValidateProperty(Pattern pattern, Object object = null) {
+    private T createAndValidateProperty(Pattern pattern, Object object = null) {
         if (object) {
             String generatedValue = object as String
             boolean matches = pattern.matcher(generatedValue).matches()
@@ -25,26 +25,31 @@ class ExPatternValueDslProperty {
         return createProperty(pattern, object)
     }
 
-    DslProperty anyCronExpression() {
+
+    abstract protected T createProperty(Pattern pattern, Object generatedValue);
+
+
+    T anyPositiveNumber() {
+        return createAndValidateProperty(ExRegexPatterns.POSITIVE_NUMBER, 42);
+    }
+
+
+    T anyCronExpression() {
         //0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
-        return createAndValidateProperty(ExRegexPatterns.CRON_EXPRESSION, randomCronExpression(20))
-    }
-
-    DslProperty anyPositiveNumber() {
-        return createAndValidateProperty(ExRegexPatterns.POSITIVE_NUMBER, this.random.nextInt(Integer.MAX_VALUE - 1) + 1)
+        return createAndValidateProperty(ExRegexPatterns.CRON_EXPRESSION, randomCronExpression())
     }
 
 
-    private static String randomCronExpression(int length) {
+    private static String randomCronExpression() {
         //0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
         String template = "%s %s %s %s %s %s";
         Object[] vals = new Object[6]
-        vals[0] = or(random.nextInt(59), "*", "*/2", "*/17") //seconds
+        vals[0] = or(nextInt(59), "*", "*/2", "*/17") //seconds
         vals[1] = or(nextInt(59), "*", "*/2", "*/17") //minutes
         vals[2] = or(nextInt(23), "*", "*/10") //hour
         vals[3] = or(nextInt(1, 31), "*") //days of month
         vals[4] = or(nextInt(1, 12), "*") // month
-        vals[5] = or(nextInt(1, 7),"*", "MON", "MON-FRI") // day of week
+        vals[5] = or(nextInt(1, 7), "*", "MON", "MON-FRI") // day of week
         return String.format(template, vals);
     }
 
@@ -71,9 +76,5 @@ class ExPatternValueDslProperty {
      */
     private static int nextInt(int start, int stop) {
         return random.nextInt(stop) + start;
-    }
-
-    private DslProperty createProperty(Pattern pattern, Object generatedValue) {
-        return new DslProperty(pattern, generatedValue)
     }
 }
