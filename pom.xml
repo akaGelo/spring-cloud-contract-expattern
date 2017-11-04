@@ -2,18 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.7.RELEASE</version>
-        <relativePath/>
-    </parent>
 
+    <groupId>ru.vyukov</groupId>
     <artifactId>spring-cloud-contract-expattern</artifactId>
     <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
 
+
+    <name>spring-cloud-contract-expattern</name>
+
+    <description>Additional expressions for use in cloud contracts</description>
+
     <properties>
+        <spting.boot.version>1.5.7.RELEASE</spting.boot.version>
         <spring-cloud.version>Dalston.SR4</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -33,6 +34,7 @@
     <scm>
         <url>https://github.com/akaGelo/spring-cloud-contract-expattern</url>
         <connection>scm:git:https://github.com/akaGelo/spring-cloud-contract-expattern</connection>
+        <tag>HEAD</tag>
     </scm>
 
     <url>https://github.com/akaGelo/spring-cloud-contract-expattern</url>
@@ -96,6 +98,14 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spting.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
@@ -139,8 +149,6 @@
                 </configuration>
             </plugin>
 
-
-            <!---->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -206,7 +214,6 @@
                 </executions>
             </plugin>
 
-            <!---->
 
         </plugins>
     </build>
