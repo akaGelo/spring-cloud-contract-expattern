@@ -1,17 +1,14 @@
 package ru.vyukov.contract
 
-import groovy.transform.PackageScope
-import org.springframework.cloud.contract.spec.internal.ClientDslProperty
 import org.springframework.cloud.contract.spec.internal.DslProperty
-import org.springframework.cloud.contract.spec.internal.ServerDslProperty
 
-import java.util.function.BiFunction
 import java.util.regex.Pattern
+
+import static ru.vyukov.contract.RandomUtils.*
 
 
 abstract class Patterns<T extends DslProperty> {
 
-    private final static Random random = new Random()
 
     private T createAndValidateProperty(Pattern pattern, Object object = null) {
         if (object) {
@@ -30,7 +27,13 @@ abstract class Patterns<T extends DslProperty> {
 
 
     T anyPositiveNumber() {
-        return createAndValidateProperty(ExRegexPatterns.POSITIVE_NUMBER, 42);
+        int rndInt = nextInt(Integer.MAX_VALUE);
+        return createAndValidateProperty(ExRegexPatterns.POSITIVE_NUMBER, rndInt);
+    }
+
+    T anyShortPositiveNaturalNumber() {
+        int naturalRndShort = nextInt(Short.MAX_VALUE - 1) + 1;
+        return createAndValidateProperty(ExRegexPatterns.SHORT_POSITIVE_NATURAL_NUMBER, naturalRndShort);
     }
 
 
@@ -40,41 +43,18 @@ abstract class Patterns<T extends DslProperty> {
     }
 
 
-    private static String randomCronExpression() {
-        //0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
-        String template = "%s %s %s %s %s %s";
-        Object[] vals = new Object[6]
-        vals[0] = or(nextInt(59), "*", "*/2", "*/17") //seconds
-        vals[1] = or(nextInt(59), "*", "*/2", "*/17") //minutes
-        vals[2] = or(nextInt(23), "*", "*/10") //hour
-        vals[3] = or(nextInt(1, 31), "*") //days of month
-        vals[4] = or(nextInt(1, 12), "*") // month
-        vals[5] = or(nextInt(1, 7), "*", "MON", "MON-FRI") // day of week
-        return String.format(template, vals);
+    T anyNetworkPort() {
+        int offset = 1024;
+        int randomPort = offset + nextInt(65534 - offset);
+        return createAndValidateProperty(ExRegexPatterns.NETWORK_PORT, randomPort);
     }
 
-    private static Object or(int intVal, String... otherVals) {
-        if (random.nextBoolean() || 0 == otherVals.length) {
-            return intVal;
-        }
-        return or(otherVals);
+
+    T anyMongoObjectId() {
+        return createAndValidateProperty(ExRegexPatterns.MONGO_OBJECT_ID, randomMongoObjectId());
     }
 
-    private static Object or(String... otherVals) {
-        return otherVals[random.nextInt(otherVals.length)];
-    }
 
-    private static int nextInt(int bound) {
-        return random.nextInt(bound)
-    }
 
-    /**
-     * [start,stop]
-     * @param start
-     * @param bound
-     * @return
-     */
-    private static int nextInt(int start, int stop) {
-        return random.nextInt(stop) + start;
-    }
+
 }

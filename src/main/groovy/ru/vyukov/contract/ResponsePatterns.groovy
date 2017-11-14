@@ -1,9 +1,6 @@
 package ru.vyukov.contract
 
 import groovy.transform.CompileStatic
-import groovy.transform.PackageScope
-import org.springframework.cloud.contract.spec.internal.ClientDslProperty
-import org.springframework.cloud.contract.spec.internal.DslProperty
 import org.springframework.cloud.contract.spec.internal.ServerDslProperty
 
 import java.util.regex.Pattern
@@ -22,8 +19,15 @@ class ResponsePatterns {
         return impl.anyCronExpression();
     }
 
-    static ServerDslProperty anyPositiveNumberS() {
+    static ServerDslProperty anyPositiveNumbers() {
         return impl.anyPositiveNumber();
     }
 
+    static ServerDslProperty anyNetworkPort() {
+        return impl.anyNetworkPort();
+    }
+
+    static ServerDslProperty anyShortPositiveNumber() {
+        return impl.anyShortPositiveNaturalNumber();
+    }
 }
