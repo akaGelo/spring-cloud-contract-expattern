@@ -30,4 +30,8 @@ class ResponsePatterns {
     static ServerDslProperty anyShortPositiveNumber() {
         return impl.anyShortPositiveNaturalNumber();
     }
+
+    static ServerDslProperty anyMongoObjectId(){
+        return impl.anyMongoObjectId();
+    }
 }

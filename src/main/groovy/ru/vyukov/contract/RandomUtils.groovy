@@ -47,13 +47,15 @@ class RandomUtils {
     static String randomCronExpression() {
         //0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
         String template = "%s %s %s %s %s %s";
-        Object[] vals = new Object[6]
+        String[] vals = new Object[6]
         vals[0] = or(nextInt(59), "*", "*/2", "*/10") //seconds
         vals[1] = or(nextInt(59), "*", "*/2", "*/10") //minutes
         vals[2] = or(nextInt(23), "*", "*/10") //hour
         vals[3] = or(nextInt(1, 31), "*") //days of month
         vals[4] = or(nextInt(1, 12), "*") // month
-        vals[5] = or(nextInt(1, 7), "*", "MON", "MON-FRI") // day of week
+        vals[5] = or("*", "SUN-SAT") // day of week
+
+
         return String.format(template, vals);
     }
 

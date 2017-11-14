@@ -2,6 +2,7 @@ package ru.vyukov.contract
 
 import groovy.transform.CompileStatic
 import org.springframework.cloud.contract.spec.internal.ClientDslProperty
+import org.springframework.cloud.contract.spec.internal.ServerDslProperty
 
 import java.util.regex.Pattern
 
@@ -30,4 +31,8 @@ class RequestPatterns {
         return impl.anyShortPositiveNaturalNumber();
     }
 
+
+    static ClientDslProperty anyMongoObjectId() {
+        return impl.anyMongoObjectId();
+    }
 }

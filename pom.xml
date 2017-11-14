@@ -6,7 +6,7 @@
     <groupId>ru.vyukov</groupId>
     <artifactId>spring-cloud-contract-expattern</artifactId>
     <packaging>jar</packaging>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3.1-SNAPSHOT</version>
 
 
     <name>spring-cloud-contract-expattern</name>
@@ -14,7 +14,7 @@
     <description>Additional expressions for use in cloud contracts</description>
 
     <properties>
-        <spting.boot.version>1.5.7.RELEASE</spting.boot.version>
+        <spting.boot.version>1.5.8.RELEASE</spting.boot.version>
         <spring-cloud.version>Dalston.SR4</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
