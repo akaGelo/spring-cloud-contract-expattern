@@ -31,7 +31,7 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:https://github.com/akaGelo/spring-cloud-contract-expattern</connection>
+        <connection>scm:git:ssh://github.com/akaGelo/spring-cloud-contract-expattern</connection>
         <tag>spring-cloud-contract-expattern-0.3</tag>
     </scm>
 
