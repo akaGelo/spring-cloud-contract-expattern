@@ -5,7 +5,7 @@
     <groupId>ru.vyukov</groupId>
     <artifactId>spring-cloud-contract-expattern</artifactId>
     <packaging>jar</packaging>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
 
 
     <name>spring-cloud-contract-expattern</name>
@@ -33,7 +33,7 @@
     <scm>
         <url>https://github.com/akaGelo/spring-cloud-contract-expattern</url>
         <connection>scm:git:https://github.com/akaGelo/spring-cloud-contract-expattern</connection>
-        <tag>v0.3</tag>
+        <tag>spring-cloud-contract-expattern-0.3</tag>
     </scm>
 
     <url>https://github.com/akaGelo/spring-cloud-contract-expattern</url>
